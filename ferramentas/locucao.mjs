@@ -23,7 +23,7 @@ import path from "node:path";
 const REPO = "patriciomachado/supportstore-midia";
 const BASE = process.env.GEMINI_BASE || "https://generativelanguage.googleapis.com";
 const MODEL = process.env.GEMINI_TTS_MODEL || "gemini-2.5-flash-preview-tts";
-const VOICE = process.env.GEMINI_VOICE || "Charon";
+const VOICE = process.env.GEMINI_VOICE || "Puck";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 // A chave vem da variável GEMINI_API_KEY ou, se não existir, do arquivo chave.txt ao lado deste script (não vai para o GitHub).
@@ -33,10 +33,19 @@ if (!KEY) {
 }
 
 const args = process.argv.slice(2);
-const date = args.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a));
+function segundaDaSemana() {
+  // segunda-feira desta semana (se hoje é domingo, a próxima segunda)
+  const h = new Date();
+  const dow = h.getDay(); // 0 dom ... 6 sáb
+  const delta = dow === 0 ? 1 : 1 - dow;
+  h.setDate(h.getDate() + delta);
+  const z = (n) => String(n).padStart(2, "0");
+  return `${h.getFullYear()}-${z(h.getMonth() + 1)}-${z(h.getDate())}`;
+}
+const date = args.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a)) || segundaDaSemana();
 const flag = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
 
-if (!date) { console.error("Informe a data da segunda-feira da semana. Ex.: node locucao.mjs 2026-10-19"); process.exit(1); }
+console.log(`Semana de ${date}`);
 if (!KEY) { console.error("Falta a chave: defina GEMINI_API_KEY ou crie o arquivo chave.txt ao lado do script (veja LEIAME-locucao.md)."); process.exit(1); }
 
 const outDir = flag("--out") || path.join(process.cwd(), "saida", date);
@@ -94,7 +103,7 @@ async function gerar(texto, estilo, voz = VOICE, modelo = MODEL) {
 }
 
 const dados = await carregarFalas();
-const estilo = dados.estilo || "Fale em português do Brasil, com tom direto e calmo, como um técnico experiente explicando para um cliente. Ritmo natural, sem exagero e sem tom de propaganda.";
+const estilo = dados.estilo || "Fale em português do Brasil como um amigo que entende de celular dando uma dica: voz calorosa, acolhedora, quase sorrindo. Ritmo natural e um pouco ligeiro, sem tom de ordem, sem voz de locutor, sem propaganda.";
 const falas = dados.falas || {};
 const chaves = Object.keys(falas);
 if (!chaves.length) { console.error("O arquivo não tem nenhuma fala em \"falas\"."); process.exit(1); }
@@ -104,6 +113,7 @@ const gerados = [];
 for (const k of chaves) {
   // cada fala pode ser um texto ou { "texto": "...", "voz": "Puck", "modelo": "...", "estilo": "..." }
   const f = typeof falas[k] === "string" ? { texto: falas[k] } : falas[k];
+  if (existsSync(path.join(outDir, `${k}.wav`)) && !args.includes("--refazer")) { console.log(`${k}: já existe, pulando (use --refazer para gerar de novo)`); gerados.push(path.join(outDir, `${k}.wav`)); continue; }
   process.stdout.write(`Gerando ${k} (${f.texto.length} caracteres, voz ${f.voz || VOICE})... `);
   const wav = await gerar(f.texto, f.estilo || estilo, f.voz || VOICE, f.modelo || MODEL);
   const arq = path.join(outDir, `${k}.wav`);
