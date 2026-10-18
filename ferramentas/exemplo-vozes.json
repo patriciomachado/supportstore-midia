@@ -1,0 +1,26 @@
+{
+  "estilo": "Fale em português do Brasil como numa conversa entre amigos: ritmo rápido e animado, informal, com pausas muito curtas. Tom de quem está contando uma dica útil e quer ajudar, sem voz de locutor, sem leitura de texto, sem propaganda.",
+  "falas": {
+    "voz-puck": {
+      "texto": "O celular caiu na água. Larga o arroz. Desliga, não carrega, tira a capa e o chip, e leva a um técnico o quanto antes.",
+      "voz": "Puck"
+    },
+    "voz-zephyr": {
+      "texto": "O celular caiu na água. Larga o arroz. Desliga, não carrega, tira a capa e o chip, e leva a um técnico o quanto antes.",
+      "voz": "Zephyr"
+    },
+    "voz-fenrir": {
+      "texto": "O celular caiu na água. Larga o arroz. Desliga, não carrega, tira a capa e o chip, e leva a um técnico o quanto antes.",
+      "voz": "Fenrir"
+    },
+    "voz-orus": {
+      "texto": "O celular caiu na água. Larga o arroz. Desliga, não carrega, tira a capa e o chip, e leva a um técnico o quanto antes.",
+      "voz": "Orus"
+    },
+    "voz-puck-pro": {
+      "texto": "O celular caiu na água. Larga o arroz. Desliga, não carrega, tira a capa e o chip, e leva a um técnico o quanto antes.",
+      "voz": "Puck",
+      "modelo": "gemini-2.5-pro-preview-tts"
+    }
+  }
+}
