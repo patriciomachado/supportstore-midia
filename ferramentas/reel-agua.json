@@ -1,0 +1,17 @@
+{
+  "estilo": "Fale em português do Brasil como um amigo que entende de celular dando uma dica para alguém que está preocupado: voz calorosa, acolhedora, quase sorrindo. Ritmo natural e um pouco ligeiro, com pausas curtas. Sem tom de ordem, sem voz de locutor, sem propaganda.",
+  "falas": {
+    "reel-agua-puck": {
+      "texto": "Caiu o celular na água? Calma, acontece. Primeiro, desliga ele, não tenta carregar, e tira a capa e o chip. E o arroz? Não ajuda, viu. Não tira a água de dentro. Se puder, passa num técnico de confiança. Quanto antes, melhor.",
+      "voz": "Puck"
+    },
+    "reel-agua-achird": {
+      "texto": "Caiu o celular na água? Calma, acontece. Primeiro, desliga ele, não tenta carregar, e tira a capa e o chip. E o arroz? Não ajuda, viu. Não tira a água de dentro. Se puder, passa num técnico de confiança. Quanto antes, melhor.",
+      "voz": "Achird"
+    },
+    "reel-agua-sulafat": {
+      "texto": "Caiu o celular na água? Calma, acontece. Primeiro, desliga ele, não tenta carregar, e tira a capa e o chip. E o arroz? Não ajuda, viu. Não tira a água de dentro. Se puder, passa num técnico de confiança. Quanto antes, melhor.",
+      "voz": "Sulafat"
+    }
+  }
+}
